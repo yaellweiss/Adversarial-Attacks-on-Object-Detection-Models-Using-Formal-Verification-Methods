@@ -1,0 +1,30 @@
+general:
+  device: cpu  # Select device to run verifier, cpu or cuda (GPU).
+  complete_verifier: skip
+  enable_incomplete_verification: False
+
+model:
+  name: yolo
+  path: models/yolo/yolov5s.pt
+
+data:
+  num_outputs: 80  # Number of classes for classification problem
+  dataset: YOLO_IMG
+
+specification:
+  epsilon: 0.1
+attack:
+  pgd_restarts: 2
+  pgd_steps: 1
+  pgd_alpha: 0.001
+  pgd_lr_decay: 0.999  # Learning rate decay factor used in PGD attack.
+
+solver:
+  batch_size: 4096 # 1024
+  beta-crown:
+    iteration: 20 # 20
+    lr_beta: 0.005 # 0.05
+bab:
+  timeout: 200 # 180
+  branching:
+    reduceop: max
